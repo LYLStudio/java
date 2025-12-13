@@ -15,7 +15,7 @@ import com.tfb.authgw.Services.SessionService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class TestController {
+public class AuthController {
 
     @Autowired
     private SessionService sessionService;

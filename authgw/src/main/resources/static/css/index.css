@@ -1,0 +1,39 @@
+body {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    max-width: 90%;
+    height: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+input {
+    margin: 5px;
+}
+
+button {
+    background: #28a745;
+    margin-top: 10px;
+}
+
+p {
+    color: red;
+    margin-top: 10px;
+}
+
+/* Mobile responsive overrides */
+@media (max-width: 600px) {
+    img {
+        max-width: 100%;
+    }
+}

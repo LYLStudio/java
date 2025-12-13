@@ -1,0 +1,35 @@
+/* Common styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    min-height: 100vh;
+}
+
+form {
+    max-width: 300px;
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    body {
+        margin: 10px;
+    }
+    form {
+        max-width: 100%;
+    }
+}
