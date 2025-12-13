@@ -25,9 +25,9 @@ public class TestController {
                 .label("example@example.com")
                 .secret(secret)
                 .issuer("AppName")
-                .algorithm(HashingAlgorithm.SHA1) // More on this below
-                .digits(6)
-                .period(30)
+                .algorithm(HashingAlgorithm.SHA512) // More on this below
+                .digits(8)
+                .period(120)
                 .build();
 
         QrGenerator generator = new ZxingPngQrGenerator();
