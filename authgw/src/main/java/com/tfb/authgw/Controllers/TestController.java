@@ -30,7 +30,7 @@ public class TestController {
             secret = otpService.generateSecret();
             sessionService.setAttribute(session, "secret", secret);
         }
-
+        
         String dataUri = otpService.generateQrDataUri(secret, "example@example.com", "ELK AUTHGW");
 
         model.addAttribute("dataUri", dataUri);
@@ -51,4 +51,8 @@ public class TestController {
         return "index";
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 }
