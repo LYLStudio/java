@@ -28,13 +28,15 @@ public class SecurityConfig {
     private boolean ldapEnabled;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthSuccessHandler authSuccessHandler) throws Exception {
         http
             .authorizeHttpRequests(authz -> authz
+                .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")
+                .successHandler(authSuccessHandler)
                 .permitAll()
             )
             .logout(logout -> logout

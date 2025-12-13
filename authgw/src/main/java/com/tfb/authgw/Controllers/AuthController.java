@@ -27,10 +27,9 @@ public class AuthController {
     public String index(Model model, HttpSession session) throws QrGenerationException {
         String secret = sessionService.getAttribute(session, "secret");
         if (secret == null) {
-            secret = otpService.generateSecret();
-            sessionService.setAttribute(session, "secret", secret);
+            model.addAttribute("message", "No secret found. Please log in again.");
+            return "index";
         }
-        
         String dataUri = otpService.generateQrDataUri(secret, "example@example.com", "ELK AUTHGW");
 
         model.addAttribute("dataUri", dataUri);

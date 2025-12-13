@@ -6,7 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
-    <h2>Custom Login Page</h2>
+    <h2>Login</h2>
     <form th:action="@{/login}" method="post">
         <div>
             <label for="username">Username:</label>
@@ -18,7 +18,7 @@
         </div>
         <button type="submit">Login</button>
     </form>
-    <div th:if="${param.error}" style="color: red;">Invalid username or password.</div>
-    <div th:if="${param.logout}" style="color: green;">You have been logged out.</div>
+    <div th:if="${param.error}" class="error-message">Invalid username or password.</div>
+    <div th:if="${param.logout}" class="logout-message">You have been logged out.</div>
 </body>
 </html>
