@@ -13,13 +13,24 @@
 	<artifactId>authgw</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>authgw</name>
-	<description>Demo project for Spring Boot</description>
+	<description>ESB ELK AuthGW</description>
 	<url />
 	<licenses>
 		<license />
 	</licenses>
 	<developers>
-		<developer />
+		<developer>
+			<id>liam</id>
+			<name>LI-YING, LIANG</name>
+			<email>liam.liang@fubon.com</email>
+			<organization>台北富邦商業銀行股份有限公司</organization>
+			<organizationUrl>https://www.fubon.com</organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>Asia/Taipei</timezone>
+		</developer>
 	</developers>
 	<scm>
 		<connection />
