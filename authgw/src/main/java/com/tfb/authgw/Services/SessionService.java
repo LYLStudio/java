@@ -7,11 +7,11 @@ import jakarta.servlet.http.HttpSession;
 @Service
 public class SessionService {
 
-    public void setSecret(HttpSession session, String secret) {
-        session.setAttribute("secret", secret);
+    public void setAttribute(HttpSession session, String key, String value) {
+        session.setAttribute(key, value);
     }
 
-    public String getSecret(HttpSession session) {
-        return (String) session.getAttribute("secret");
+    public String getAttribute(HttpSession session, String key) {
+        return (String) session.getAttribute(key);
     }
 }
