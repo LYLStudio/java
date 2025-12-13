@@ -35,6 +35,6 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
             secretPersistenceService.saveSecret(userId, secret);
         }
         sessionService.setAttribute(request.getSession(), "secret", secret);
-        response.sendRedirect("/");
+        response.sendRedirect(request.getContextPath() + "/");
     }
 }
