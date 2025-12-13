@@ -1,5 +1,6 @@
 package com.tfb.authgw.Services;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class SecretPersistenceService {
             if (!file.exists()) {
                 return new HashMap<>();
             }
-            return objectMapper.readValue(file, Map.class);
+            return objectMapper.readValue(file, new TypeReference<Map<String, String>>() {});
         } catch (IOException e) {
             e.printStackTrace();
             return new HashMap<>();
