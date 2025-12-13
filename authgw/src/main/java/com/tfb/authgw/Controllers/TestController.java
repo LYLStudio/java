@@ -16,27 +16,26 @@ import static dev.samstevens.totp.util.Utils.getDataUriForImage;
 @Controller
 public class TestController {
     @GetMapping("/")
-	public String index(Model model) throws QrGenerationException {
+    public String index(Model model) throws QrGenerationException {
 
         SecretGenerator secretGenerator = new DefaultSecretGenerator();
         String secret = secretGenerator.generate();
 
-
         QrData data = new QrData.Builder()
-            .label("example@example.com")
-            .secret(secret)
-            .issuer("AppName")
-            .algorithm(HashingAlgorithm.SHA1) // More on this below
-            .digits(6)
-            .period(30)
-            .build();
+                .label("example@example.com")
+                .secret(secret)
+                .issuer("AppName")
+                .algorithm(HashingAlgorithm.SHA1) // More on this below
+                .digits(6)
+                .period(30)
+                .build();
 
-            QrGenerator generator = new ZxingPngQrGenerator();
-byte[] imageData = generator.generate(data);
-String mimeType = generator.getImageMimeType();
-String dataUri = getDataUriForImage(imageData, mimeType);
+        QrGenerator generator = new ZxingPngQrGenerator();
+        byte[] imageData = generator.generate(data);
+        String mimeType = generator.getImageMimeType();
+        String dataUri = getDataUriForImage(imageData, mimeType);
 
-model.addAttribute("dataUri", dataUri);
-return "index";
-	}
+        model.addAttribute("dataUri", dataUri);
+        return "index";
+    }
 }
