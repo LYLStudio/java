@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>QR Code</title>
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
+
 <body>
     <h1>TOTP QR Code</h1>
     <img th:src="${dataUri}" alt="QR Code" />
     <br><br>
     <form th:action="@{/verify}" method="post">
         <label for="otp">Enter OTP:</label>
-        <input type="text" id="otp" name="otp" required>
+        <input type="text" id="otp" name="otp" autocomplete="off" required>
         <button type="submit">Verify</button>
     </form>
     <p th:if="${message}" th:text="${message}"></p>
 </body>
+
 </html>

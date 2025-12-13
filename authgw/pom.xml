@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.tfb</groupId>
 	<artifactId>authgw</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>authgw</name>
 	<description>ESB ELK AuthGW</description>
 	<url />
@@ -82,6 +82,14 @@
 			<artifactId>totp</artifactId>
 			<version>1.7.1</version>
 		</dependency>
+		<!-- production env remove-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<!-- production env remove-->
 	</dependencies>
 
 	<build>

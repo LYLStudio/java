@@ -26,7 +26,8 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
     private SessionService sessionService;
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+            Authentication authentication) throws IOException, ServletException {
         String userId = authentication.getName();
         String secret = secretPersistenceService.getSecret(userId);
         if (secret == null) {

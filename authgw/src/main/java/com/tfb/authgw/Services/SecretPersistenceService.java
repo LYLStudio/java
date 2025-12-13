@@ -32,7 +32,8 @@ public class SecretPersistenceService {
             if (!file.exists()) {
                 return new HashMap<>();
             }
-            return objectMapper.readValue(file, new TypeReference<Map<String, String>>() {});
+            return objectMapper.readValue(file, new TypeReference<Map<String, String>>() {
+            });
         } catch (IOException e) {
             e.printStackTrace();
             return new HashMap<>();

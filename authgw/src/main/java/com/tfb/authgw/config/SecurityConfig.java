@@ -28,27 +28,25 @@ public class SecurityConfig {
     private boolean ldapEnabled;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthSuccessHandler authSuccessHandler) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthSuccessHandler authSuccessHandler)
+            throws Exception {
         http
-            .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                .anyRequest().authenticated()
-            )
-            .formLogin(form -> form
-                .loginPage("/login")
-                .successHandler(authSuccessHandler)
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .permitAll()
-            );
+                .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                        .anyRequest().authenticated())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .successHandler(authSuccessHandler)
+                        .permitAll())
+                .logout(logout -> logout
+                        .permitAll());
         return http.build();
     }
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder =
-            http.getSharedObject(AuthenticationManagerBuilder.class);
+        AuthenticationManagerBuilder authenticationManagerBuilder = http
+                .getSharedObject(AuthenticationManagerBuilder.class);
         if (ldapEnabled) {
             try {
                 LdapContextSource contextSource = new LdapContextSource();
@@ -57,18 +55,19 @@ public class SecurityConfig {
                 contextSource.afterPropertiesSet();
 
                 FilterBasedLdapUserSearch userSearch = new FilterBasedLdapUserSearch(
-                    "ou=users", "(uid={0})", contextSource);
+                        "ou=users", "(uid={0})", contextSource);
                 userSearch.setSearchSubtree(true);
 
                 BindAuthenticator bindAuthenticator = new BindAuthenticator(contextSource);
                 bindAuthenticator.setUserSearch(userSearch);
 
                 DefaultLdapAuthoritiesPopulator authoritiesPopulator = new DefaultLdapAuthoritiesPopulator(
-                    contextSource, "ou=groups");
+                        contextSource, "ou=groups");
                 authoritiesPopulator.setGroupRoleAttribute("cn");
                 authoritiesPopulator.setSearchSubtree(true);
 
-                LdapAuthenticationProvider ldapProvider = new LdapAuthenticationProvider(bindAuthenticator, authoritiesPopulator);
+                LdapAuthenticationProvider ldapProvider = new LdapAuthenticationProvider(bindAuthenticator,
+                        authoritiesPopulator);
                 authenticationManagerBuilder.authenticationProvider(ldapProvider);
             } catch (Exception e) {
                 // Fallback to in-memory if LDAP fails
@@ -83,9 +82,9 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.withUsername("user")
-            .password(passwordEncoder().encode("password"))
-            .roles("USER")
-            .build();
+                .password(passwordEncoder().encode("password"))
+                .roles("USER")
+                .build();
         return new InMemoryUserDetailsManager(user);
     }
 
