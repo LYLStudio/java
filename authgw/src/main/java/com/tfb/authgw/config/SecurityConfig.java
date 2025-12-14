@@ -39,7 +39,11 @@ public class SecurityConfig {
                         .successHandler(authSuccessHandler)
                         .permitAll())
                 .logout(logout -> logout
-                        .permitAll());
+                        //.permitAll());
+                        .logoutUrl("/logout")          // 指定登出 URL
+                        .logoutSuccessUrl("/login?logout")    // 登出後導向
+                        .invalidateHttpSession(true)          // 清除 session
+                        .deleteCookies("JSESSIONID"));        // 清除 cookie
         return http.build();
     }
 

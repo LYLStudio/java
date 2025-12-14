@@ -8,13 +8,13 @@
 </head>
 
 <body>
-    <h1>Login</h1>
+    <h1>ＡＤ驗證</h1>
     <form th:action="@{/login}" method="post">
-        <label for="username">Username:</label>
+        <label for="username">使用者:</label>
         <input type="text" id="username" name="username" autocomplete="off" required>
-        <label for="password">Password:</label>
+        <label for="password">密碼:</label>
         <input type="password" id="password" name="password" autocomplete="off" required>
-        <button type="submit">Login</button>
+        <button type="submit">登入</button>
     </form>
     <div th:if="${param.error}" class="error-message">Invalid username or password.</div>
     <div th:if="${param.logout}" class="logout-message">You have been logged out.</div>

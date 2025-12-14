@@ -8,6 +8,11 @@ button {
     margin-top: 10px;
 }
 
+button.btnLogout {
+    background: red;
+    margin-top: 10px;
+}
+
 p {
     color: red;
     margin-top: 10px;

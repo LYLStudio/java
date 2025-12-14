@@ -29,6 +29,8 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
         String userId = authentication.getName();
+        sessionService.setAttribute(request.getSession(), "userId", userId);
+
         String secret = secretPersistenceService.getSecret(userId);
         if (secret == null) {
             secret = otpService.generateSecret();

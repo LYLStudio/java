@@ -2,21 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>QR Code</title>
+    <title>OTP</title>
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 
 <body>
-    <h1>TOTP QR Code</h1>
-    <img th:src="${dataUri}" alt="QR Code" />
+    <h1>OTP驗證</h1>
     <br><br>
     <form th:action="@{/verify}" method="post">
-        <label for="otp">Enter OTP:</label>
+        <label for="otp">輸入ＯＴＰ:</label>
         <input type="text" id="otp" name="otp" autocomplete="off" required>
-        <button type="submit">Verify</button>
+        <button type="submit">驗證</button>
     </form>
     <p th:if="${message}" th:text="${message}"></p>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btnLogout">登出</button>
+    </form>
 </body>
 
 </html>

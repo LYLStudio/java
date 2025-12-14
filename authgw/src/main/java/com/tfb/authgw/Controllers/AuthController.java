@@ -1,13 +1,11 @@
 package com.tfb.authgw.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import dev.samstevens.totp.exceptions.QrGenerationException;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfb.authgw.Services.OTPService;
@@ -23,22 +21,6 @@ public class AuthController {
 
     @Autowired
     private OTPService otpService;
-
-    @Value("${totp.issuer}")
-    private String totpIssuer;
-
-    @GetMapping("/")
-    public String index(Model model, HttpSession session) throws QrGenerationException {
-        String secret = sessionService.getAttribute(session, "secret");
-        if (secret == null) {
-            model.addAttribute("message", "No secret found. Please log in again.");
-            return "index";
-        }
-        String dataUri = otpService.generateQrDataUri(secret, "example@example.com", totpIssuer);
-
-        model.addAttribute("dataUri", dataUri);
-        return "index";
-    }
 
     @PostMapping("/verify")
     public String verifyOTP(@RequestParam String otp, HttpSession session, Model model) {
