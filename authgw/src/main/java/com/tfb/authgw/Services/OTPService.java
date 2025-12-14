@@ -1,5 +1,6 @@
 package com.tfb.authgw.Services;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import dev.samstevens.totp.code.CodeGenerator;
@@ -20,6 +21,16 @@ import static dev.samstevens.totp.util.Utils.getDataUriForImage;
 
 @Service
 public class OTPService {
+    @Value("${totp.code.length:6}")
+    private int totpCodeLength;
+    @Value("${totp.code.period:30}")
+    private int totpCodePeriod;
+    @Value("${totp.hash.algorithm:SHA1}")
+    private String totpHashAlgorithm;
+
+    private HashingAlgorithm getAlgorithm() {
+        return HashingAlgorithm.valueOf(totpHashAlgorithm);
+    }
 
     public String generateSecret() {
         SecretGenerator secretGenerator = new DefaultSecretGenerator();
@@ -31,9 +42,9 @@ public class OTPService {
                 .label(label)
                 .secret(secret)
                 .issuer(issuer)
-                .algorithm(HashingAlgorithm.SHA1)
-                .digits(6)
-                .period(30)
+                .algorithm(getAlgorithm())
+                .digits(totpCodeLength)
+                .period(totpCodePeriod)
                 .build();
 
         QrGenerator generator = new ZxingPngQrGenerator();
@@ -43,8 +54,10 @@ public class OTPService {
     }
 
     public boolean verifyOTP(String secret, String otp) {
+        //System.out.println("Verifying OTP: " + otp + " with secret: " + secret);
+
         TimeProvider timeProvider = new SystemTimeProvider();
-        CodeGenerator codeGenerator = new DefaultCodeGenerator(HashingAlgorithm.SHA1, 6);
+        CodeGenerator codeGenerator = new DefaultCodeGenerator(getAlgorithm(), totpCodeLength);
         CodeVerifier verifier = new DefaultCodeVerifier(codeGenerator, timeProvider);
         return verifier.isValidCode(secret, otp);
     }
