@@ -29,7 +29,7 @@ public class AuthController {
             model.addAttribute("message", "No secret found. Please refresh the page.");
             return "index";
         }
-
+        
         boolean successful = otpService.verifyOTP(secret, otp);
 
         model.addAttribute("message", successful ? "Valid OTP" : "Invalid OTP");
