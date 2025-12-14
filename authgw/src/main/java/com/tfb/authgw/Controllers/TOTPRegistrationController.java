@@ -28,13 +28,16 @@ public class TOTPRegistrationController {
     @Value("${totp.issuer}")
     private String totpIssuer;
 
+    @Value("${totp.label.domain}")
+    private String totpLabelDomain;
+
     @GetMapping("/register")
     public String register(Model model, HttpSession session) throws QrGenerationException {
         // 產生新的 secret
         String secret = sessionService.getAttribute(session, "secret");
         String userId = sessionService.getAttribute(session, "userId");
         // 產生 QRCode Data URI
-        String dataUri = otpService.generateQrDataUri(secret, userId + "@fubon.com", totpIssuer);
+        String dataUri = otpService.generateQrDataUri(secret, String.format("%s@%s",userId, totpLabelDomain), totpIssuer);
         model.addAttribute("dataUri", dataUri);
 
         return "totp-register"; // 顯示 QRCode 的頁面
