@@ -1,0 +1,37 @@
+{"properties": [
+  {
+    "name": "totp.hash.algorithm",
+    "type": "java.lang.String",
+    "description": "A description for 'totp.hash.algorithm'"
+  },
+  {
+    "name": "totp.code.length",
+    "type": "java.lang.String",
+    "description": "A description for 'totp.code.length'"
+  },
+  {
+    "name": "totp.code.period",
+    "type": "java.lang.String",
+    "description": "A description for 'totp.code.period'"
+  },
+  {
+    "name": "totp.issuer",
+    "type": "java.lang.String",
+    "description": "A description for 'totp.issuer'"
+  },
+  {
+    "name": "totp.label.domain",
+    "type": "java.lang.String",
+    "description": "A description for 'totp.label.domain'"
+  },
+  {
+    "name": "ldap.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'ldap.enabled'"
+  },
+  {
+    "name": "spring.ldap.user-dn-pattern",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.ldap.user-dn-pattern'"
+  }
+]}

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tfb.authgw.Services.OTPService;
-import com.tfb.authgw.Services.SessionService;
+import com.tfb.authgw.Services.Impl.OTPService;
+import com.tfb.authgw.Services.Impl.SessionService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -24,7 +24,7 @@ public class AuthController {
 
     @PostMapping("/verify")
     public String verifyOTP(@RequestParam String otp, HttpSession session, Model model) {
-        String secret = sessionService.getAttribute(session, "secret");
+        String secret = (String)sessionService.getAttribute(session, "secret");
         if (secret == null) {
             model.addAttribute("message", "No secret found. Please refresh the page.");
             return "index";

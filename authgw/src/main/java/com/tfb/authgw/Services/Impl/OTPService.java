@@ -1,7 +1,9 @@
-package com.tfb.authgw.Services;
+package com.tfb.authgw.Services.Impl;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.tfb.authgw.Services.Interfaces.IOTPService;
 
 import dev.samstevens.totp.code.CodeGenerator;
 import dev.samstevens.totp.code.CodeVerifier;
@@ -20,7 +22,7 @@ import dev.samstevens.totp.time.TimeProvider;
 import static dev.samstevens.totp.util.Utils.getDataUriForImage;
 
 @Service
-public class OTPService {
+public class OTPService implements IOTPService {
     @Value("${totp.code.length:6}")
     private int totpCodeLength;
     @Value("${totp.code.period:30}")
@@ -32,11 +34,13 @@ public class OTPService {
         return HashingAlgorithm.valueOf(totpHashAlgorithm);
     }
 
+    @Override
     public String generateSecret() {
         SecretGenerator secretGenerator = new DefaultSecretGenerator();
         return secretGenerator.generate();
     }
 
+    @Override
     public String generateQrDataUri(String secret, String label, String issuer) throws QrGenerationException {
         QrData data = new QrData.Builder()
                 .label(label)
@@ -53,6 +57,7 @@ public class OTPService {
         return getDataUriForImage(imageData, mimeType);
     }
 
+    @Override
     public boolean verifyOTP(String secret, String otp) {
         //System.out.println("Verifying OTP: " + otp + " with secret: " + secret);
 

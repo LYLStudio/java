@@ -7,8 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.tfb.authgw.Services.OTPService;
-import com.tfb.authgw.Services.SessionService;
+import com.tfb.authgw.Services.Impl.OTPService;
+import com.tfb.authgw.Services.Impl.SessionService;
 
 import dev.samstevens.totp.exceptions.QrGenerationException;
 import jakarta.servlet.http.HttpSession;
@@ -34,8 +34,8 @@ public class TOTPRegistrationController {
     @GetMapping("/register")
     public String register(Model model, HttpSession session) throws QrGenerationException {
         // 產生新的 secret
-        String secret = sessionService.getAttribute(session, "secret");
-        String userId = sessionService.getAttribute(session, "userId");
+        String secret = (String)sessionService.getAttribute(session, "secret");
+        String userId = (String)sessionService.getAttribute(session, "userId");
         // 產生 QRCode Data URI
         String dataUri = otpService.generateQrDataUri(secret, String.format("%s@%s",userId, totpLabelDomain), totpIssuer);
         model.addAttribute("dataUri", dataUri);

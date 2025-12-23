@@ -1,8 +1,9 @@
 package com.tfb.authgw.config;
 
-import com.tfb.authgw.Services.OTPService;
-import com.tfb.authgw.Services.SecretPersistenceService;
-import com.tfb.authgw.Services.SessionService;
+import com.tfb.authgw.Services.Impl.OTPService;
+import com.tfb.authgw.Services.Impl.SecretPersistenceService;
+import com.tfb.authgw.Services.Impl.SessionService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
